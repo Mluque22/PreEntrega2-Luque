@@ -1,14 +1,143 @@
-html, body {
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  height: 100%;
+  background-color: #f5f5f5;
+  color: #333;
 }
 
-main {
-  flex: 1;
-  padding: 20px;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #212529;
 }
-.pTexto {
+
+/* Navbar Styles */
+.navbar {
+  background-color: #343a40;
+  padding: 1rem;
+}
+
+.navbar-brand {
+  color: #ffffff !important;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.navbar-nav .nav-link {
+  color: #ffffff !important;
+  margin-right: 1rem;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #ffc107 !important;
+}
+
+.navbar-nav .dropdown-menu {
+  background-color: #343a40;
+  border: none;
+}
+
+.navbar-nav .dropdown-item {
+  color: #ffffff;
+}
+
+.navbar-nav .dropdown-item:hover {
+  background-color: #495057;
+  color: #ffc107;
+}
+
+.cart-widget {
+  display: flex;
+  align-items: center;
+  color: #ffffff;
+  font-size: 1.2rem;
+}
+
+.cart-widget span {
+  margin-left: 0.5rem;
+  font-weight: bold;
+  color: #ffc107;
+}
+
+/* ItemListContainer Styles */
+.itemContainer {
   text-align: center;
-  
+  padding: 2rem;
+  background-color: #ffffff;
+  margin: 2rem auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.itemContainer h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.itemContainer p {
+  font-size: 1.2rem;
+  color: #6c757d;
+}
+
+/* ItemDetailContainer Styles */
+.item-detail-container {
+  padding: 2rem;
+  margin: 2rem auto;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.item-detail-container h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: #495057;
+}
+
+.item-detail-container p {
+  font-size: 1.2rem;
+  line-height: 1.5;
+  color: #6c757d;
+}
+
+/* Buttons */
+.btn-primary {
+  background-color: #007bff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  color: #ffffff;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .navbar-nav {
+    text-align: center;
+  }
+
+  .itemContainer,
+  .item-detail-container {
+    padding: 1rem;
+  }
+
+  .itemContainer h1 {
+    font-size: 1.5rem;
+  }
+
+  .itemContainer p,
+  .item-detail-container p {
+    font-size: 1rem;
+  }
 }
