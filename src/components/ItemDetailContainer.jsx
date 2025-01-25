@@ -1,33 +1,26 @@
-import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
-
-
-const mockItemDetails = {
-    1: { name: 'Camiseta Lakers', description: 'Camiseta oficial de los Lakers', price: 30 },
-    2: { name: 'Shorts Bulls', description: 'Shorts de los Bulls', price: 20 },
-    3: { name: 'Gorra Celtics', description: 'Gorra oficial de los Celtics', price: 15 },
-};
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { getOneProduct } from '../mock/data'; // Ya importa la función correctamente
+import ItemDetail from './ItemDetail';
 
 const ItemDetailContainer = () => {
     const { id } = useParams();
-    const [item, setItem] = useState(null);
+    const [product, setProduct] = useState(null);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
-
-        setItem(mockItemDetails[id]);
+        getOneProduct(id)
+            .then((data) => setProduct(data))
+            .catch((err) => setError(err));
     }, [id]);
 
+    if (error) {
+        return <p className="text-red-500 text-center mt-8">Error: {error}</p>;
+    }
+
     return (
-        <div>
-            {item ? (
-                <>
-                    <h1>{item.name}</h1>
-                    <p>{item.description}</p>
-                    <p>Precio: ${item.price}</p>
-                </>
-            ) : (
-                <p>Producto no encontrado.</p>
-            )}
+        <div className="container mx-auto mt-8">
+            <ItemDetail product={product} />
         </div>
     );
 };

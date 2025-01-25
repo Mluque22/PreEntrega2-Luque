@@ -1,21 +1,25 @@
-// NavBar.jsx
-import { Link } from "react-router-dom";
-import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
+import { NavLink } from "react-router-dom";
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+import NavDropdown from "react-bootstrap/NavDropdown";
 import CartWidget from "./CartWidget";
 
 function NavBar() {
     return (
         <Navbar expand="lg" className="bg-body-tertiary">
             <Container>
-                <Navbar.Brand as={Link} to="/">Store NBA</Navbar.Brand>
+                <Navbar.Brand as={NavLink} to="/">Store NBA</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
-                        <Nav.Link as={Link} to="/">Home</Nav.Link>
+                        <Nav.Link as={NavLink} to="/">Home</Nav.Link>
                         <NavDropdown title="Products" id="basic-nav-dropdown">
-                            <NavDropdown.Item as={Link} to="/category/camisetas">Camisetas</NavDropdown.Item>
-                            <NavDropdown.Item as={Link} to="/category/shorts">Shorts</NavDropdown.Item>
-                            <NavDropdown.Item as={Link} to="/category/gorras">Gorras</NavDropdown.Item>
+                            <NavDropdown.Item as={NavLink} to="/category/camisetas">Camisetas</NavDropdown.Item>
+                            <NavDropdown.Divider />
+                            <NavDropdown.Item as={NavLink} to="/category/shorts">Shorts</NavDropdown.Item>
+                            <NavDropdown.Divider />
+                            <NavDropdown.Item as={NavLink} to="/category/gorras">Gorras</NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
                     <Nav>
@@ -27,4 +31,4 @@ function NavBar() {
     );
 }
 
-export default NavBar; 
+export default NavBar;
