@@ -3,20 +3,16 @@ import { Link } from "react-router-dom";
 
 const Item = ({ product }) => {
     return (
-        <div className="border rounded-lg shadow-md p-4 flex flex-col items-center">
-            <img
-                src={product.img}
-                alt={product.name}
-                className="w-48 h-48 object-cover rounded-lg mb-4"
-            />
-            <h2 className="text-xl font-bold text-center">{product.name}</h2>
-            <p className="text-lg text-green-500 font-semibold mt-2">${product.price}</p>
-            <Link
-                to={`/item/${product.id}`}
-                className="ver_detalle"
-            >
-                Ver Detalle
-            </Link>
+        <div className="card" style={{ width: "18rem" }}>
+            <img src={product.img} className="card-img-top" alt={product.name} />
+            <div className="card-body">
+                <h5 className="card-title">{product.name}</h5>
+                <p className="card-text">{product.description}</p>
+                <p className="card-text">Price: ${product.price}</p>
+                <Link to={`/item/${product.id}`} className="btn btn-primary">
+                    Ver más
+                </Link>
+            </div>
         </div>
     );
 };
@@ -27,6 +23,7 @@ Item.propTypes = {
         name: PropTypes.string.isRequired,
         price: PropTypes.number.isRequired,
         img: PropTypes.string.isRequired,
+        description: PropTypes.string.isRequired,
     }).isRequired,
 };
 

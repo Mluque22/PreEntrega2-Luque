@@ -1,31 +1,53 @@
-import PropTypes from 'prop-types';
+import { useCart } from "../context/CartContext";
+import { getOneProduct } from "../mock/data";
+import { useState, useEffect } from "react";
+import PropTypes from "prop-types";
+import ItemQuantitySelector from "./ItemQuantitySelector";  // Importamos el selector de cantidad
 
 const ItemDetail = ({ product }) => {
-    if (!product) {
-        return <p className="text-center">Cargando detalles del producto...</p>;
-    }
+    const { addToCart } = useCart();
+    const [productDetails, setProductDetails] = useState(null);
+    const [quantity, setQuantity] = useState(1);  // Estado para la cantidad
+
+    useEffect(() => {
+        const fetchProduct = async () => {
+            try {
+                const productData = await getOneProduct(product.id);
+                setProductDetails(productData);
+            } catch (error) {
+                console.error("Error al obtener el producto:", error);
+            }
+        };
+        fetchProduct();
+    }, [product.id]);
+
+    const handleAddToCart = () => {
+        if (productDetails) {
+            // Pasamos la cantidad seleccionada junto con el producto
+            addToCart({ ...productDetails, quantity });
+        }
+    };
 
     return (
-        <div className="flex flex-col items-center p-4 border rounded-lg shadow-md">
-            <img
-                src={product.img}
-                alt={product.name}
-                className="w-64 h-64 object-cover rounded-lg"
-            />
-            <h2 className="text-2xl font-bold mt-4">{product.name}</h2>
-            <p className="text-gray-500 text-lg mt-2">{product.description}</p>
-            <p className="text-lg mt-2">
-                <span className="font-bold">Categoría:</span> {product.category}
-            </p>
-            <p className="text-lg mt-2">
-                <span className="font-bold">Precio:</span> ${product.price}
-            </p>
-            <p className="text-lg mt-2">
-                <span className="font-bold">Stock disponible:</span> {product.stock}
-            </p>
-            <button className="agregar_al_carrito">
-                Agregar al carrito
-            </button>
+        <div className="item-detail">
+            {productDetails ? (
+                <>
+                    <h2>{productDetails.name}</h2>
+                    <img src={productDetails.img} alt={productDetails.name} />
+                    <p>{productDetails.description}</p>
+                    <p>Precio: ${productDetails.price}</p>
+
+                    {/* Selector de cantidad */}
+                    <ItemQuantitySelector quantity={quantity} setQuantity={setQuantity} />
+
+                    {/* Botón de agregar al carrito */}
+                    <button className="agregar-carrito" onClick={handleAddToCart}>
+                        Agregar al carrito
+                    </button>
+                </>
+            ) : (
+                <p>Cargando detalles del producto...</p>
+            )}
         </div>
     );
 };
@@ -34,12 +56,10 @@ ItemDetail.propTypes = {
     product: PropTypes.shape({
         id: PropTypes.number.isRequired,
         name: PropTypes.string.isRequired,
-        price: PropTypes.number.isRequired,
-        stock: PropTypes.number.isRequired,
         description: PropTypes.string.isRequired,
+        price: PropTypes.number.isRequired,
         img: PropTypes.string.isRequired,
-        category: PropTypes.string.isRequired,
-    }),
+    }).isRequired,
 };
 
 export default ItemDetail;

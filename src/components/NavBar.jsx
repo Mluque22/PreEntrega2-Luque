@@ -4,8 +4,13 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import CartWidget from "./CartWidget";
+import { useCart } from "../context/CartContext";  // Importamos el contexto del carrito
 
 function NavBar() {
+    const { cart } = useCart();  // Usamos el contexto para obtener el carrito
+
+    const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);  // Calcula la cantidad total de productos en el carrito
+
     return (
         <Navbar expand="lg" className="bg-body-tertiary">
             <Container>
@@ -23,7 +28,9 @@ function NavBar() {
                         </NavDropdown>
                     </Nav>
                     <Nav>
-                        <CartWidget />
+                        <NavLink to="/checkout"> {/* Enlace al carrito/checkout */}
+                            <CartWidget totalItems={totalItems} />  {/* Pasamos la cantidad de productos al CartWidget */}
+                        </NavLink>
                     </Nav>
                 </Navbar.Collapse>
             </Container>

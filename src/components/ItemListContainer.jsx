@@ -1,25 +1,20 @@
-import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { productosDB } from '../mock/data'; // Importar productosDB
-import ItemList from './ItemList';
-import PropTypes from 'prop-types';
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { productosDB } from "../mock/data";
+import ItemList from "./ItemList";
+import PropTypes from "prop-types";
 
 const ItemListContainer = ({ greeting, texto }) => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
-    const { categoryId } = useParams(); // Obtenemos la categoría desde las rutas
+    const { categoryId } = useParams();
 
     useEffect(() => {
-        // Verificación en consola para depurar si estamos recibiendo los productos correctamente
-        console.log("productosDB:", productosDB);
-
-        // Lógica para filtrar productos según la categoría
         if (categoryId) {
             const filteredProducts = productosDB.filter((product) => product.category === categoryId);
-            console.log("Productos filtrados:", filteredProducts); // Verificar si el filtro funciona bien
             setProducts(filteredProducts);
         } else {
-            setProducts(productosDB); // Mostrar todos los productos si no hay categoría seleccionada
+            setProducts(productosDB);
         }
         setLoading(false);
     }, [categoryId]);

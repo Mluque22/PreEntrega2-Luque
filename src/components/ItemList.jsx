@@ -3,11 +3,11 @@ import Item from "./Item";
 
 const ItemList = ({ products }) => {
     return (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div className="itemContainer">
             {products.map((product) => (
                 <div
                     key={product.id}
-                    className={`item ${product.category}`}  /* Aplicar clase específica según la categoría */
+                    className={`item ${product.category}`}
                 >
                     <Item key={product.id} product={product} />
                 </div>
