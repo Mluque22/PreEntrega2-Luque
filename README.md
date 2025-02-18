@@ -46,4 +46,4 @@ Se utilizan rutas dinámicas con React Router para navegar entre páginas de cat
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 Agradecimiento especial a Daniel Riverol, docente del curso de React en CoderHouse y al tutor Jerlib Gonzalez por su correcciones y ayudas en el transcurso de la clase.
 ----------------------------------------------------------------------------------------------------------------------------------------------------
-Tu Nombre - Desarrollado por Matias Luque.
+Desarrollado por Matias Luque.
